@@ -6,8 +6,25 @@ var products = [{"id": "100","name": "iPhone 4S","brand": "Apple","os": "iOS"},
 				{"id": "105","name": "Surface","brand": "Microsoft","os": "Windows"}];
 		
 $(document).ready(function(){
+
+	
+function populate()
+{
+
+	text="";
+	text="<table><tr><td>Id</td><td>Name</td><td>Brand</td><td>Opertating System</td><td>Remove</td></tr>";
+	for(i=0;i<products.length;i++){   
+ 	
+		text+="<tr><td>"+products[i].id+"</td><td>"+products[i].name+"</td><td>"+products[i].brand+"</td><td>"+products[i].os+"</td><td><span class='remove_item'>X<span></td></tr>";
+	
+     }
+	 text=$("#Disptable").html(text);
+	text="</table>";  
+}
+populate();
 $("#select_OS").change(function(){ 
 	$("#tblshow").show();
+
 	$id=$("#select_OS option:selected").attr('id');
 	text="";
 	text="<table><tr><td>Id</td><td>Name</td><td>Brand</td><td>Opertating System</td><td>Remove</td></tr>";
@@ -21,7 +38,15 @@ $("#select_OS").change(function(){
 	text="</table>";   
 })
 $("#tblshow").on('click','.remove_item',function(){
+ var tbl_length=$(this).parent().parent().parent().children().length;
+ console.log(tbl_length);
+ if(tbl_length<=2)
+ {
+	$("#tblshow").remove();
+ }
+ else{
   $(this).parent().parent().remove();
+}
 })
 
 $("#select_OS1").change(function(){
@@ -59,19 +84,24 @@ $("#select_OS1").change(function(){
 		text+="<tr><td>"+products[i].id+"</td><td>"+products[i].name+"</td><td>"+products[i].brand+"</td><td>"+products[i].os+"</td><td><span class='remove_item'>X<span></td></tr>";
 	
 	cnt++;
-}
+       }
      }
 	 text=$("#tblshow1").html(text);
 	text="</table>";
 
- })
+    })
 
- $("#tblshow1").on('click','.remove_item',function()
-  {
+   $("#tblshow1").on('click','.remove_item',function()
+    {
+		var tbl_length=$(this).parent().parent().parent().children().length;
+		console.log(tbl_length);
+		if(tbl_length<=2)
+		{
+		   $("#tblshow1").remove();
+		}
+		
 	$(this).parent().parent().remove();	
-  })
-
-
-})
+    })
+   })
 
 
